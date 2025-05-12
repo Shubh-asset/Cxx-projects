@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <SDL3/SDL.h>
+#include <SDL/SDL.h>
 
 using namespace std;
 
