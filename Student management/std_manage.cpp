@@ -1,5 +1,6 @@
 #include <iostream>
 #include <conio.h> //console input output
+#include <limits>
 using namespace std;
 
 int i = 0;
@@ -10,6 +11,12 @@ struct Student
     string name, grade;
     float marks, perc;
 } s[25];
+
+void clearInputBuffer()
+{
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+}
 
 void show()
 {
@@ -40,32 +47,77 @@ void del()
     if (i == 0)
     {
         cout << "\n\n *** No Record Found ***";
+        getch();
+        return;
     }
-    else
-    {
-        int id, found = 0;
-        cout << "\n\n Enter Student Id: ";
-        cin >> id;
 
-        for (int a = 0; a < i; a++)
+    int id;
+    bool found = false;
+    cout << "\n\n Enter Student Id to delete: ";
+
+    // Input validation
+    while (!(cin >> id))
+    {
+        cout << "Invalid input. Please enter a numeric ID: ";
+        clearInputBuffer();
+    }
+
+    for (int a = 0; a < i; a++)
+    {
+        if (id == s[a].id)
         {
-            if (id == s[a].id)
+            // Shift all elements after the found one left by one
+            for (int m = a; m < i - 1; m++)
             {
-                for (int m = a; m < i - 1; m++)
-                {
-                    s[m].id = s[m + 1].id;
-                    s[m].name = s[m + 1].name;
-                    s[m].marks = s[m + 1].marks;
-                    s[m].perc = s[m + 1].perc;
-                    s[m].grade = s[m + 1].grade;
-                }
-                cout << "\n\n *** Record Deleted Successfully ***";
-                found++;
-                break;
+                s[m] = s[m + 1]; // This copies the entire struct at once
             }
+            i--; // Decrement the global counter
+            cout << "\n\n *** Record Deleted Successfully ***";
+            found = true;
+            break;
         }
     }
+
+    if (!found)
+    {
+        cout << "\n *** Student ID not found!! ***";
+    }
+    getch();
 }
+
+// void del()
+// {
+//     system("cls");
+//     cout << "\n\n\t\t\t *** Delete Record ***";
+//     if (i == 0)
+//     {
+//         cout << "\n\n *** No Record Found ***";
+//     }
+//     else
+//     {
+//         int id, found = 0;
+//         cout << "\n\n Enter Student Id: ";
+//         cin >> id;
+
+//         for (int a = 0; a < i; a++)
+//         {
+//             if (id == s[a].id)
+//             {
+//                 for (int m = a; m < i - 1; m++)
+//                 {
+//                     s[m].id = s[m + 1].id;
+//                     s[m].name = s[m + 1].name;
+//                     s[m].marks = s[m + 1].marks;
+//                     s[m].perc = s[m + 1].perc;
+//                     s[m].grade = s[m + 1].grade;
+//                 }
+//                 cout << "\n\n *** Record Deleted Successfully ***";
+//                 found++;
+//                 break;
+//             }
+//         }
+//     }
+// }
 
 void update()
 {
