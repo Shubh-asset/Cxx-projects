@@ -1,0 +1,3 @@
+*ahahha@gmail.com*2234dfs4
+*cd "f:\Coding\Skills\Cpp projects\Login&registration\" ; if ($?) { g++ login_regist.cpp -o login_regist } ; if ($?) { .\login_regist }*
+Shubh.10rathi*itsshubh@gmail.com*123plmokn
